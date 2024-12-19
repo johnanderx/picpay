@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+  COMMON
+  MERCHANT
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model User {
+  id        String   @id @default(uuid())
+  type      UserType
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  email     String   @unique
+  cpf       String   @unique
+  cnpj      String?  @unique
+  wallet    Wallet?
+}
+
+model Wallet {
+  id                   String        @id @default(uuid())
+  userId               String        @unique
+  createdAt            DateTime      @default(now())
+  user                 User          @relation(fields: [userId], references: [id])
+  sentTransactions     Transaction[] @relation("SentTransactions")
+  receivedTransactions Transaction[] @relation("ReceivedTransactions")
+  balance              Int           @default(0)
+}
+
+model Transaction {
+  id               String            @id @default(uuid())
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  senderWalletId   String
+  senderWallet     Wallet            @relation("SentTransactions", fields: [senderWalletId], references: [id])
+  receiverWalletId String
+  receiverWallet   Wallet            @relation("ReceivedTransactions", fields: [receiverWalletId], references: [id])
+  status           TransactionStatus @default(PENDING)
+  value            Int
+}
