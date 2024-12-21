@@ -4,14 +4,17 @@ import { RegisterUseCase } from './useCases/register.useCase';
 import { RegisterRepository } from './repositories/register.repository';
 import { PrismaService } from 'src/share/prisma.service';
 import { FindUserRepository } from './repositories/find.user.repository';
-
+import { JwtService } from '@nestjs/jwt';
+import { LoginUseCase } from './useCases/login.useCase';
 @Module({
   controllers: [UsersControllers],
   providers: [
     RegisterUseCase,
+    LoginUseCase,
     RegisterRepository,
     FindUserRepository,
     PrismaService,
+    JwtService,
   ],
 })
 export class UsersModule {}

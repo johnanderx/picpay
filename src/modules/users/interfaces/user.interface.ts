@@ -8,3 +8,8 @@ export interface User {
   cnpj?: string;
   userType: UserType;
 }
+
+export interface Login {
+  email: string;
+  password: string;
+}
