@@ -2,13 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/share/prisma.service';
 import { User } from '../interfaces/user.interface';
 import { encrypt } from '../utils/crypto';
+import { WalletRepository } from './wallet.repository';
 @Injectable()
 export class RegisterRepository {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly walletRepository: WalletRepository,
+  ) {}
   async createUser(user: User) {
     const encryptedPassword = await encrypt(user.password);
-
-    return await this.prismaService.user.create({
+    const createdUser = await this.prismaService.user.create({
       data: {
         name: user.name,
         email: user.email,
@@ -18,5 +21,7 @@ export class RegisterRepository {
         type: user.userType,
       },
     });
+    await this.walletRepository.createWallet(createdUser.id);
+    return createdUser;
   }
 }
