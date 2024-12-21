@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreditRepository } from '../repositories/credit.repository';
 import { TransactionRepository } from '../repositories/transacton.repository';
 import { TransactionStatus } from '@prisma/client';
@@ -13,26 +17,33 @@ export class CreditUseCase {
     receiverWalletId: string,
     value: number,
   ) {
-    const credit = await this.creditRepository.addCredit(
-      receiverWalletId,
-      value,
-    );
     let status: TransactionStatus = 'PENDING';
-    if (credit) {
+    let isAuthorization = false;
+    if (isAuthorization) {
       status = 'SUCCESS';
+      const credit = await this.creditRepository.addCredit(
+        receiverWalletId,
+        value,
+      );
+      const transaction = await this.transactionRepository.createTransaction(
+        senderWalletId,
+        receiverWalletId,
+        value,
+        status,
+      );
+      return {
+        credit,
+        transaction,
+      };
     } else {
       status = 'FAILED';
+      await this.transactionRepository.createTransaction(
+        senderWalletId,
+        receiverWalletId,
+        value,
+        status,
+      );
+      throw new ConflictException('Falha na transação.');
     }
-
-    const transaction = await this.transactionRepository.createTransaction(
-      senderWalletId,
-      receiverWalletId,
-      value,
-      status,
-    );
-    return {
-      credit,
-      transaction,
-    };
   }
 }
