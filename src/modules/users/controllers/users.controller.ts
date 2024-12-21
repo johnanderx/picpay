@@ -20,7 +20,6 @@ export class UsersControllers {
         user,
       };
     } catch (error) {
-      console.error('Erro capturado no controlador:', error);
       throw error;
     }
   }
