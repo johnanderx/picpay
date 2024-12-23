@@ -1,11 +1,13 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { TransferRepository } from '../repositories/transfer.repository';
 import { PrismaService } from 'src/share/services/prisma.service';
+import { FindUserRepository } from 'src/modules/users/repositories/find.user.repository';
 @Injectable()
 export class TransferUseCase {
   constructor(
     private readonly transferRepository: TransferRepository,
     private readonly prismaService: PrismaService,
+    private readonly findUserRepository: FindUserRepository,
   ) {}
 
   async transfer(
@@ -14,12 +16,19 @@ export class TransferUseCase {
     receiverWalletId: string,
     value: number,
   ) {
+    const cnpjExists = await this.findUserRepository.findUserById(userId);
     const senderWallet = await this.prismaService.wallet.findUnique({
       where: { id: senderWalletId },
     });
 
     if (!senderWallet) {
       throw new Error('Carteira do remetente não encontrada.');
+    }
+
+    if (cnpjExists.cnpj) {
+      throw new UnauthorizedException(
+        'Somente usuários comuns podem realizar transferências.',
+      );
     }
 
     if (senderWallet.userId !== userId) {

@@ -8,6 +8,7 @@ import { PrismaService } from 'src/share/services/prisma.service';
 import { TransactionRepository } from './repositories/transacton.repository';
 import { TransferUseCase } from './useCases/transfer.useCase';
 import { TransferRepository } from './repositories/transfer.repository';
+import { FindUserRepository } from '../users/repositories/find.user.repository';
 
 @Module({
   controllers: [TransactionsController],
@@ -17,6 +18,7 @@ import { TransferRepository } from './repositories/transfer.repository';
     CreditRepository,
     TransactionRepository,
     TransferRepository,
+    FindUserRepository,
     CreditUseCase,
     TransferUseCase,
     PrismaService,
