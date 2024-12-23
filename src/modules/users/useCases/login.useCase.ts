@@ -26,7 +26,10 @@ export class LoginUseCase {
       throw new ConflictException('Senha inválida.');
     }
 
-    const payload = { email: user.email, id: user.id };
+    const payload = {
+      id: user.id,
+      email: user.email,
+    };
     const token = await this.jwtService.signAsync(payload, {
       secret: process.env.JWT_SECRET,
     });

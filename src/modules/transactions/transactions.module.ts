@@ -6,6 +6,8 @@ import { CreditUseCase } from './useCases/credit.useCase';
 import { CreditRepository } from './repositories/credit.repository';
 import { PrismaService } from 'src/share/services/prisma.service';
 import { TransactionRepository } from './repositories/transacton.repository';
+import { TransferUseCase } from './useCases/transfer.useCase';
+import { TransferRepository } from './repositories/transfer.repository';
 
 @Module({
   controllers: [TransactionsController],
@@ -14,7 +16,9 @@ import { TransactionRepository } from './repositories/transacton.repository';
     JwtService,
     CreditRepository,
     TransactionRepository,
+    TransferRepository,
     CreditUseCase,
+    TransferUseCase,
     PrismaService,
   ],
 })
