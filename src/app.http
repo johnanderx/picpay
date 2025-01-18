@@ -1,0 +1,12 @@
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "fullName": "John Anderson",
+    "email": "johnander.dev@mailinator.com",
+    "password": "12345678",
+    "cpf": "111.111.111-11",
+    "cnpj": "94.693.112/0001-19",
+    "userType": "MERCHANT"    
+}
+

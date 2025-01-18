@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  nest-app:
+    container_name: picpay
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/picpaydb
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    environment:
+      POSTGRES_USER: john
+      POSTGRES_PASSWORD: john
+      POSTGRES_DB: picpaydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
