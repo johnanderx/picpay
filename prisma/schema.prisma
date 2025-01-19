@@ -36,8 +36,8 @@ model Wallet {
   userId               String        @unique
   user                 User          @relation(fields: [userId], references: [id])
   balance              Decimal       @default(0)
-  receivedTransactions Transaction[] @relation("sentTransactions")
-  sentTransactions     Transaction[] @relation("receivedTransactions")
+  receivedTransactions Transaction[] @relation("receivedTransactions")
+  sentTransactions     Transaction[] @relation("sentTransactions")
 }
 
 model Transaction {

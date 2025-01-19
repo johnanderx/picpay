@@ -34,16 +34,15 @@ export class RegisterUseCase {
     if (cnpjExists) {
       throw new ConflictException('Este CNPJ já existe.');
     }
-
-    if (cnpjExists && user.userType === 'COMMON') {
+    if (user.userType === 'COMMON' && user.cnpj) {
       throw new UnauthorizedException(
-        'Usuários com CNPJ não pode ser do tipo "COMMON". Por favor, altere para "MERCHANT".',
+        'Usuários com CNPJ não podem ser do tipo "COMMON". Por favor, altere para "MERCHANT".',
       );
     }
 
-    if (!cnpjExists && user.userType === 'MERCHANT') {
+    if (user.userType === 'MERCHANT' && !user.cnpj) {
       throw new UnauthorizedException(
-        'Usuários sem CNPJ não pode ser do tipo "MERCHANT". Por favor, altere para "COMMON".',
+        'Usuários sem CNPJ não podem ser do tipo "MERCHANT". Por favor, altere para "COMMON".',
       );
     }
 

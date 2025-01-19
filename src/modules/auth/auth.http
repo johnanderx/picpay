@@ -8,14 +8,28 @@ Content-Type: application/json
     "password": "12345678",
     "cpf": "121.144.153-21",
     "cnpj": "90.272.675/0001-82",
+    "userType": "MERCHANT"    
+}
+
+### Request to register a second user.
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "fullName": "Xedo",
+    "email": "xedo@gmail.com",
+    "password": "12345678",
+    "cpf": "212.142.152-21",
     "userType": "COMMON"    
 }
+
+
 
 ### Request to authenticate a user.
 POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "johnander.dev@gmail.com",
+    "email": "xedo@gmail.com",
     "password": "12345678"  
 }

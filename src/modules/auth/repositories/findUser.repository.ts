@@ -5,6 +5,10 @@ import { PrismaService } from 'src/services/prisma.service';
 export class FindUserRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  public async findUserById(id: string) {
+    return await this.prismaService.user.findUnique({ where: { id } });
+  }
+
   public async findUserByEmail(email: string) {
     return await this.prismaService.user.findUnique({ where: { email } });
   }
@@ -13,9 +17,10 @@ export class FindUserRepository {
     return await this.prismaService.user.findUnique({ where: { cpf } });
   }
 
-  public async findUserByCnpj(cnpj: string) {
+  public async findUserByCnpj(cnpj: string | null) {
     if (cnpj) {
       return await this.prismaService.user.findUnique({ where: { cnpj } });
     }
+    return null;
   }
 }

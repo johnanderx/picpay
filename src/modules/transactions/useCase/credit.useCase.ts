@@ -24,7 +24,7 @@ export class CreditUseCase {
     if (!authorization) {
       status = Status.FAILED;
       throw new UnauthorizedException(
-        'Você não tem autorização para efetuar o depósito.',
+        'Você não tem autorização para realizar este depósito.',
       );
     }
 
@@ -38,7 +38,7 @@ export class CreditUseCase {
 
     status = Status.SUCCESS;
 
-    await this.transactionRepository.createTransaction(
+    await this.transactionRepository.createCreditTransaction(
       payeeWalletId,
       value,
       status,
