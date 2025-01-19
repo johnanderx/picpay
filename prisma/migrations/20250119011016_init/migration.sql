@@ -13,7 +13,6 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
     "cnpj" TEXT,
-    "walletId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

@@ -10,7 +10,7 @@ services:
       - .:/usr/src/app
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/picpaydb
+      - DATABASE_URL=postgresql://john:john@postgres:5432/picpaydb
     depends_on:
       - postgres
 

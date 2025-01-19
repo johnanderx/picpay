@@ -1,12 +1,12 @@
-POST http://localhost:3000/
+# User creation
+POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "fullName": "John Anderson",
-    "email": "johnander.dev@mailinator.com",
+    "fullName": "bubu",
+    "email": "joana@gmail.com",
     "password": "12345678",
-    "cpf": "111.111.111-11",
-    "cnpj": "94.693.112/0001-19",
-    "userType": "MERCHANT"    
+    "cpf": "121.144.153-21",
+    "userType": "COMMON"    
 }
 
