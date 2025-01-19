@@ -32,20 +32,21 @@ model User {
 }
 
 model Wallet {
-  id               String        @id @default(uuid())
-  userId           String        @unique
-  user             User          @relation(fields: [userId], references: [id])
-  balance          Decimal       @default(0)
-  payerTransaction Transaction[] @relation("PayerTransactions")
-  payeeTransaction Transaction[] @relation("PayeeTransactions")
+  id                   String        @id @default(uuid())
+  userId               String        @unique
+  user                 User          @relation(fields: [userId], references: [id])
+  balance              Decimal       @default(0)
+  receivedTransactions Transaction[] @relation("sentTransactions")
+  sentTransactions     Transaction[] @relation("receivedTransactions")
 }
 
 model Transaction {
   id            String   @id @default(uuid())
-  payerWalletId String
-  payerWallet   Wallet   @relation("PayerTransactions", fields: [payerWalletId], references: [id])
+  payerWalletId String?
+  payerWallet   Wallet?  @relation("sentTransactions", fields: [payerWalletId], references: [id])
   payeeWalletId String
-  payeeWallet   Wallet   @relation("PayeeTransactions", fields: [payeeWalletId], references: [id])
+  payeeWallet   Wallet   @relation("receivedTransactions", fields: [payeeWalletId], references: [id])
+  value         Decimal
   status        Status   @default(PENDING)
   createdAt     DateTime @default(now())
 }

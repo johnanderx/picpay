@@ -1,0 +1,9 @@
+### Credit insertion.
+POST http://localhost:3000/transaction/credit
+Content-Type: application/json
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImExOWQ1MjdjLTg1MTYtNGM0MC04OTk0LTJkMzIwNzQ0ZTU4ZSIsImVtYWlsIjoiam9obmFuZGVyLmRldkBnbWFpbC5jb20iLCJpYXQiOjE3MzczMTgwODJ9.JTbzumECQNy42NvQmAbsLaZTVty_J2UGetZ7ywd74tY
+
+{
+    "payeeWallet": "a3457b21-28d5-4bfb-83b6-b70f071ebab7",
+    "value": 500
+}
