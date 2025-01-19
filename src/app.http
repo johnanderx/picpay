@@ -1,12 +1,20 @@
-# User creation
+### Request to register a user.
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "fullName": "bubu",
-    "email": "joana@gmail.com",
+    "fullName": "John Anderson",
+    "email": "john@gmail.com",
     "password": "12345678",
     "cpf": "121.144.153-21",
     "userType": "COMMON"    
 }
 
+### Request to authenticate a user.
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "john@gmail.com",
+    "password": "12345678"  
+}

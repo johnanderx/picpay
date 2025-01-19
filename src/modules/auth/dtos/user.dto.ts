@@ -13,25 +13,28 @@ export class UserDto {
   userType: UserType;
 
   @IsString()
-  @IsNotEmpty({ message: 'Nome não pode ser vazio.' })
+  @IsNotEmpty({ message: 'O nome não pode estar vazio.' })
   fullName: string;
 
-  @IsEmail({ require_tld: true }, { message: 'Foramto do E-mail inválido' })
+  @IsEmail(
+    { require_tld: true },
+    { message: 'O formato do e-mail é inválido.' },
+  )
   email: string;
 
   @IsString()
-  @MinLength(8, { message: 'A senha deve conter pelo menos 8 caracteres.' })
+  @MinLength(8, { message: 'A senha deve conter, no mínimo, 8 caracteres.' })
   password: string;
 
   @IsString()
   @Matches(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, {
-    message: 'Formato do CPF inválido.',
+    message: 'O formato do CPF é inválido.',
   })
   cpf: string;
 
   @IsOptional()
   @Matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/, {
-    message: 'Formato do CNPJ inválido.',
+    message: 'O formato do CNPJ é inválido.',
   })
   cnpj?: string;
 }
