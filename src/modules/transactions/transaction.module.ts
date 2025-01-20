@@ -8,10 +8,12 @@ import { FindWalletRepository } from './repositories/findWallet.repository';
 import { TransfersUseCase } from './useCase/transfers.useCase';
 import { TransfersRepository } from './repositories/transfers.repository';
 import { FindUserRepository } from '../auth/repositories/findUser.repository';
+import { NotificationService } from 'src/services/notification.service';
 @Module({
   controllers: [TransactionController],
   providers: [
     PrismaService,
+    NotificationService,
     CreditRepository,
     TransactionRepository,
     FindWalletRepository,

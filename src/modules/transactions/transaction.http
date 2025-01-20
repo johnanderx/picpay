@@ -4,7 +4,7 @@ Content-Type: application/json
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkOTUxODZlLTA5M2QtNGM1MS05YWNlLTVmOWZiZTUyYTYzMCIsImVtYWlsIjoieGVkb0BnbWFpbC5jb20iLCJpYXQiOjE3MzczMjk3Nzh9.zltUnP8VM8M6yqfcOSBmIuqqj1bvRynbRAktpLmA30o
 
 {
-    "payeeWallet": "549c0622-c0ea-44d6-b56e-16d64dcc71ed",
+    "payeeWallet": "6722955f-9369-4dff-9fbc-12c0bb288d17",
     "value": 500
 }
 

@@ -8,17 +8,22 @@ import { CreditRepository } from '../repositories/credit.repository';
 import { TransactionRepository } from '../repositories/transaction.repository';
 import { FindWalletRepository } from '../repositories/findWallet.repository';
 import { Status } from '@prisma/client';
+import { NotificationService } from 'src/services/notification.service';
+import { FindUserRepository } from 'src/modules/auth/repositories/findUser.repository';
 @Injectable()
 export class CreditUseCase {
   constructor(
     private readonly creditRepository: CreditRepository,
     private readonly transactionRepository: TransactionRepository,
     private readonly findWalletRepository: FindWalletRepository,
+    private readonly findUserRepository: FindUserRepository,
+    private readonly notificationService: NotificationService,
   ) {}
   public async execute(payeeWalletId: string, value: number) {
     const payeeWallet =
       await this.findWalletRepository.findWalletById(payeeWalletId);
     const authorization = true;
+    const user = await this.findUserRepository.findUserById(payeeWallet.userId);
     let status: Status = Status.PENDING;
 
     if (!authorization) {
@@ -43,6 +48,11 @@ export class CreditUseCase {
       value,
       status,
     );
-    return await this.creditRepository.insertCredit(payeeWalletId, value);
+    await this.creditRepository.insertCredit(payeeWalletId, value);
+    await this.notificationService.sendMail(
+      user.email,
+      'Débito creditado',
+      'Débito creditado na sua conta.',
+    );
   }
 }

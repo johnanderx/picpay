@@ -9,6 +9,7 @@ import { FindWalletRepository } from '../repositories/findWallet.repository';
 import { Status } from '@prisma/client';
 import { TransfersRepository } from '../repositories/transfers.repository';
 import { FindUserRepository } from 'src/modules/auth/repositories/findUser.repository';
+import { NotificationService } from 'src/services/notification.service';
 @Injectable()
 export class TransfersUseCase {
   constructor(
@@ -16,6 +17,7 @@ export class TransfersUseCase {
     private readonly transactionRepository: TransactionRepository,
     private readonly findWalletRepository: FindWalletRepository,
     private readonly findUserRepository: FindUserRepository,
+    private readonly notificationService: NotificationService,
   ) {}
   public async execute(
     payerWalletId: string,
@@ -35,7 +37,9 @@ export class TransfersUseCase {
     }
 
     const payerUser = await this.findUserRepository.findUserById(walletOwner);
-
+    const payeeUser = await this.findUserRepository.findUserById(
+      payeeWallet.userId,
+    );
     if (payerUser.userType === 'MERCHANT') {
       throw new UnauthorizedException(
         'Usuários do tipo "MERCHANT" não podem realizar transferências.',
@@ -71,10 +75,15 @@ export class TransfersUseCase {
       value,
       status,
     );
-    return await this.transfersRepository.transfer(
+    await this.transfersRepository.transfer(
       payerWalletId,
       payeeWalletId,
       value,
+    );
+    await this.notificationService.sendMail(
+      payeeUser.email,
+      'Transferência Recebida',
+      'Uma transferência foi creditada em sua conta.',
     );
   }
 }
