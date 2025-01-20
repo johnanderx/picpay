@@ -1,4 +1,4 @@
-# Desafio PicPay Simplificado
+# Desafio Backend PicPay
 
 Este projeto foi realizado como um hobby.
 
