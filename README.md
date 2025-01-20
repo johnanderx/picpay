@@ -4,7 +4,7 @@ Este projeto foi realizado como um hobby.
 
 ## Requisitos
 
-Certifique-se de que você tenha o **Docker** instalado em sua máquina.
+Certifique-se de que você tenha o **Docker** e o **Docker Compose** instalado em sua máquina.
 
 ## Como executar a aplicação
 
