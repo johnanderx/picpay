@@ -1,20 +1,20 @@
 ### Credit insertion.
 POST http://localhost:3000/transaction/credit
 Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkOTUxODZlLTA5M2QtNGM1MS05YWNlLTVmOWZiZTUyYTYzMCIsImVtYWlsIjoieGVkb0BnbWFpbC5jb20iLCJpYXQiOjE3MzczMjk3Nzh9.zltUnP8VM8M6yqfcOSBmIuqqj1bvRynbRAktpLmA30o
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0MjkwOGQxLTU3ZWEtNDRmNC1iZjc5LWExM2M4OTk1Y2ExOCIsImVtYWlsIjoieGVkb0BnbWFpbC5jb20iLCJpYXQiOjE3MzczNjA3MDl9.ypMei8p7kLqlGrycVW9mudSXxBbiuDvbmp9L0HmJchQ
 
 {
-    "payeeWallet": "6722955f-9369-4dff-9fbc-12c0bb288d17",
+    "payeeWallet": "8df2a48c-e95f-4cd7-9383-46456f1ff208",
     "value": 500
 }
 
 ### Make transfer
 POST http://localhost:3000/transaction/transfer
 Content-Type: application/json
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkOTUxODZlLTA5M2QtNGM1MS05YWNlLTVmOWZiZTUyYTYzMCIsImVtYWlsIjoieGVkb0BnbWFpbC5jb20iLCJpYXQiOjE3MzczMjk3Nzh9.zltUnP8VM8M6yqfcOSBmIuqqj1bvRynbRAktpLmA30o
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0MjkwOGQxLTU3ZWEtNDRmNC1iZjc5LWExM2M4OTk1Y2ExOCIsImVtYWlsIjoieGVkb0BnbWFpbC5jb20iLCJpYXQiOjE3MzczNjA3MDl9.ypMei8p7kLqlGrycVW9mudSXxBbiuDvbmp9L0HmJchQ
 
 {
-    "payerWallet": "549c0622-c0ea-44d6-b56e-16d64dcc71ed",
-    "payeeWallet": "6722955f-9369-4dff-9fbc-12c0bb288d17",
+    "payerWallet": "8df2a48c-e95f-4cd7-9383-46456f1ff208",
+    "payeeWallet": "644b1093-5259-4da9-bd1b-e69320b1cd00",
     "value": 1
 }

@@ -23,7 +23,6 @@ export class CreditUseCase {
     const payeeWallet =
       await this.findWalletRepository.findWalletById(payeeWalletId);
     const authorization = true;
-    const user = await this.findUserRepository.findUserById(payeeWallet.userId);
     let status: Status = Status.PENDING;
 
     if (!authorization) {
@@ -36,6 +35,8 @@ export class CreditUseCase {
     if (!payeeWallet) {
       throw new NotFoundException('Carteira do beneficiário não encontrada.');
     }
+
+    const user = await this.findUserRepository.findUserById(payeeWallet.userId);
 
     if (value <= 0) {
       throw new ConflictException('O valor deve ser superior a R$ 0,00.');
