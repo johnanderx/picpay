@@ -48,7 +48,7 @@ export class TransfersUseCase {
     if (!authorization) {
       status = Status.FAILED;
       throw new UnauthorizedException(
-        'Você não tem autorização para realizar a transferência.',
+        'Você não está autorizado a realizar a transferência.',
       );
     }
     if (!payerWallet) {
@@ -60,11 +60,11 @@ export class TransfersUseCase {
     }
 
     if (payerWallet.balance.toNumber() <= 0) {
-      throw new ConflictException('O valor deve ser superior a R$ 0,00.');
+      throw new ConflictException('O valor deve ser maior que R$ 0,00.');
     }
 
     if (value <= 0) {
-      throw new ConflictException('O valor deve ser superior a R$ 0,00.');
+      throw new ConflictException('O valor deve ser maior que R$ 0,00.');
     }
 
     status = Status.SUCCESS;

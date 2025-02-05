@@ -52,8 +52,8 @@ export class CreditUseCase {
     await this.creditRepository.insertCredit(payeeWalletId, value);
     await this.notificationService.sendMail(
       user.email,
-      'Débito creditado',
-      'Débito creditado na sua conta.',
+      'Crédito Adicionado',
+      'Crédito adicionado à sua conta.',
     );
   }
 }
